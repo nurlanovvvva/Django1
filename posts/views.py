@@ -1,14 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-# import random
-#
-# # Create your views here.
-# def hello_world(request):
-#     return HttpResponse(f"Hello World!{random.randint(1, 100)}")
-#
-#
-# def main_view(request):
-#     return render(request, 'posts/main.html')
+from posts.models import Post
 
 
 def text_response(request):
@@ -17,3 +9,12 @@ def text_response(request):
 
 def html_response(request):
     return render(request, 'template.html')
+
+def post_list_view(request):
+    posts = Post.objects.all()
+    return render(request, 'post_list.html', {'posts': posts})
+
+
+def post_detail_view(request, post_id):
+    post = Post.objects.get(id=post_id)
+    return render(request, 'post_detail.html', {'post': post})

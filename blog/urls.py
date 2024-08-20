@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path
-from posts.views import text_response, html_response
+from posts.views import text_response, html_response, post_list_view, post_detail_view
 
 
 def home_view(request):
@@ -28,5 +28,7 @@ urlpatterns = [
     path('', home_view, name='home'),
     path('text/', text_response, name='text_response'),
     path('html/', html_response, name='html_response'),
+    path('posts/', post_list_view),
+    path('posts/<int:post_id>/', post_detail_view)
 
 ]
